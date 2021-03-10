@@ -1,4 +1,4 @@
-# pragma once
+// # pragma once
 
 # include <vector>
 # include <regex> 
@@ -19,7 +19,7 @@ public:
         copy(sregex_token_iterator(doc.begin(), doc.end(), pattern, -1),
         sregex_token_iterator(),back_inserter(text));  // put the rows of the file in vector
     }
-    ~Document();
+    ~Document(){}
 
     int get_curr_row(); 
 

@@ -1,4 +1,4 @@
-# pragma once
+// # pragma once
 
 # include "Document.h"
 
@@ -14,6 +14,6 @@ public:
     Editor(string file) {
         document = Document(file);
     }
-    ~Editor();
+    ~Editor() {}
     void loop(); 
 };

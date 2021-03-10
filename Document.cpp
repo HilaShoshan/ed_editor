@@ -32,5 +32,25 @@ string Document::last_row() {
 }
 
 void Document::add_rows_after() {
-    
+    string input; 
+    cin >> input; 
+    while (input != ".") {
+        while (input != "\n") {
+            /* code */
+        }
+    }
 }
+
+void Document::add_rows_before() {}
+
+void Document::change_row() {}
+
+void Document::delete_row() {}
+
+void Document::search_text(string text) {}
+
+void Document::change_text(string old_txt, string new_txt) {}
+
+void Document::concat_rows() {}
+
+void Document::make_file() {}
