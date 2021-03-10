@@ -2,21 +2,21 @@
 
 void Editor::loop() {
 
-    char* command; 
+    string command; 
     cin >> command; 
 
     switch (command[0]) {
     case '3':
-        document.goto_row(3); 
+        cout << document.goto_row(3) << endl; 
         break;
     case '+':
-        document.advance_rows(2); 
+        cout << document.advance_rows(2) << endl; 
         break; 
     case '-':
-        document.go_back_rows(1); 
+        cout << document.go_back_rows(1) << endl; 
         break;
     case '$':
-        document.last_row(); 
+        cout << document.last_row() << endl; 
         break; 
     case 'a':
         document.add_rows_after(); 

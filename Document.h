@@ -22,9 +22,10 @@ public:
     ~Document();
 
     int get_curr_row(); 
+
     string goto_row(int row);  // go to a spesific row in the text 
-    string advance_rows(int row);  // advence in the given number of rows
-    string go_back_rows(int row);  // go back in the given number of rows
+    string advance_rows(int num);  // advence in the given number of rows
+    string go_back_rows(int num);  // go back in the given number of rows
     string last_row();  // go to the last row of the text
     void add_rows_after();  // add one or more rows after the current row
     void add_rows_before();  // add one or more rows before the current row
