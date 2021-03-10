@@ -32,13 +32,16 @@ string Document::last_row() {
 }
 
 void Document::add_rows_after() {
-    string input; 
-    cin >> input; 
-    while (input != ".") {
-        while (input != "\n") {
-            /* code */
+    /* string input; 
+    auto it = text.begin() + curr_row; 
+    while (getline(cin, input)) {
+        if (!input.empty() && input != ".") { 
+            text.insert(it, input);
+            it++; 
+        } else {
+            return; 
         }
-    }
+    } */
 }
 
 void Document::add_rows_before() {}

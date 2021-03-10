@@ -4,10 +4,13 @@ void Editor::loop() {
 
     string command; 
     cin >> command; 
-    
+
     while (command[0] != 'q') {
         cin >> command; 
         switch (command[0]) {
+        case '1':
+            cout << document.goto_row(1) << endl; 
+            break;
         case '3':
             cout << document.goto_row(3) << endl; 
             break;
