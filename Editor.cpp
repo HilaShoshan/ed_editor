@@ -6,7 +6,6 @@ void Editor::loop() {
     cin >> command; 
 
     while (command[0] != 'q') {
-        cin >> command; 
         switch (command[0]) {
         case '1':
             cout << document.goto_row(1) << endl; 
@@ -25,6 +24,7 @@ void Editor::loop() {
             break; 
         case 'a':
             document.add_rows_after(); 
+            exit(EXIT_FAILURE);
             break;
         case 'i':
             document.add_rows_before(); 
@@ -51,5 +51,6 @@ void Editor::loop() {
             if(command[0] != 'q') cout << "?" << endl;
             break;
         }
+        cin >> command; 
     }
 }

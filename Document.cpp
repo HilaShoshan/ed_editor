@@ -1,6 +1,15 @@
 # include "Document.h"
 
+int Document::get_curr_row() {
+    return this->curr_row; 
+}
+
+vector<string> Document::get_text() {
+    return this->text; 
+}
+
 string Document::goto_row(int row) {
+    // cout << "row: " + row << endl; 
     if(row > text.size()) {  // there is no such row
         throw "no such row"; 
     }
@@ -32,7 +41,7 @@ string Document::last_row() {
 }
 
 void Document::add_rows_after() {
-    /* string input; 
+    string input; 
     auto it = text.begin() + curr_row; 
     while (getline(cin, input)) {
         if (!input.empty() && input != ".") { 
@@ -41,7 +50,7 @@ void Document::add_rows_after() {
         } else {
             return; 
         }
-    } */
+    }
 }
 
 void Document::add_rows_before() {}

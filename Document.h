@@ -1,9 +1,9 @@
 // # pragma once
 
 # include <vector>
-# include <regex> 
 # include <iterator> 
 # include <iostream>
+# include <fstream>
 using namespace std;
 
 class Document {
@@ -13,15 +13,19 @@ private:
     int curr_row = 1;
 
 public:
-    Document() {}
-    Document(string doc) {
-        regex pattern(R"(\n)");
-        copy(sregex_token_iterator(doc.begin(), doc.end(), pattern, -1),
-        sregex_token_iterator(),back_inserter(text));  // put the rows of the file in vector
+    Document(){}
+    Document(string file_name) {
+        ifstream file(file_name);
+        string doc; 
+        while (getline(file, doc)) {
+            text.push_back(doc); 
+        }
     }
     ~Document(){}
 
     int get_curr_row(); 
+
+    vector<string> get_text(); 
 
     string goto_row(int row);  // go to a spesific row in the text 
     string advance_rows(int num);  // advence in the given number of rows

@@ -8,11 +8,9 @@ private:
     Document document; 
 
 public:
-    Editor(){
-        document = Document();
-    }
-    Editor(string file) {
-        document = Document(file);
+    Editor() {}
+    Editor(string file_name) {
+        document = Document(file_name);
     }
     ~Editor() {}
     void loop(); 
