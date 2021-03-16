@@ -32,6 +32,7 @@ void Editor::loop() {
             cout << document.last_row() << endl; 
             break; 
         case 'a':
+            cout << "current row: " << document.get_curr_row() << endl; 
             cout << "Please enter text to add after current row: " << endl; 
             getline(cin, line);
             while (line != ".") {

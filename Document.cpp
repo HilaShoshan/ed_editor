@@ -51,6 +51,7 @@ void Document::add_row_before(string line) {  // i
     if (!line.empty()) {
         auto it = text.begin() + curr_row - 1; 
         text.insert(it, line);
+        curr_row++;
     }
 }
 
