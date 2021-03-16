@@ -40,14 +40,31 @@ string Document::last_row() {  // $
 }
 
 void Document::add_row_after(string line) {  // a
-    auto it = text.begin() + curr_row + 1; 
-    text.insert(it, line);
-    curr_row ++; 
+    if (!line.empty()) {
+        auto it = text.begin() + curr_row + 1; 
+        text.insert(it, line);
+        curr_row ++; 
+    }
 }
 
-void Document::add_row_before(string line) {}
+void Document::add_row_before(string line) {  // i 
+    if (!line.empty()) {
+        auto it = text.begin() + curr_row; 
+        text.insert(it, line);
+    }
+}
 
-void Document::change_row(string line) {}
+bool Document::change_row(string line, bool isFirst) {  // c
+    if (!line.empty()) {
+        int this_size = text.size(); 
+        if (isFirst)  // this is the first row we add -> should replace curr_row
+            text[curr_row] = line; 
+        else 
+            add_row_after(line); 
+        return true;  // we enter new line
+    }
+    else return false;  // fail to enter new line
+}
 
 void Document::delete_row() {}
 

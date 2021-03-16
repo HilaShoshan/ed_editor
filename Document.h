@@ -16,10 +16,15 @@ public:
     Document(){}
     Document(string file_name) {
         ifstream file(file_name);
-        string doc; 
-        while (getline(file, doc)) {
-            text.push_back(doc); 
+        if (file.is_open()) {
+            string doc; 
+            while (getline(file, doc)) {
+                text.push_back(doc); 
+            }
+        } else {
+            throw runtime_error("File didn't open");
         }
+        file.close();
     }
     ~Document(){}
 
@@ -33,7 +38,7 @@ public:
     string last_row();  // go to the last row of the text
     void add_row_after(string line);  // add one row after the current row
     void add_row_before(string line);  // add one row before the current row
-    void change_row(string line);  // change the current row by another row
+    bool change_row(string line, bool isFirst);  // change the current row by another row
     void delete_row();  // delete the current row 
     void search_text(string text);  // search the given text in the following rows, and set
                                       // these row as curr_row
