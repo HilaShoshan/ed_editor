@@ -5,6 +5,8 @@ void Editor::loop() {
     string command; 
     cin >> command; 
 
+    string line; 
+
     while (command[0] != 'q') {
         switch (command[0]) {
         case '1':
@@ -23,14 +25,18 @@ void Editor::loop() {
             cout << document.last_row() << endl; 
             break; 
         case 'a':
-            document.add_rows_after(); 
-            exit(EXIT_FAILURE);
+            cout << "please enter text to add: " << endl; 
+            getline(cin, line);
+            while (line != ".") {
+                document.add_row_after(line);
+                getline(cin, line);  // ask for another line
+            }            
             break;
         case 'i':
-            document.add_rows_before(); 
+            //document.add_rows_before(); 
             break; 
         case 'c':
-            document.change_row(); 
+            //document.change_row(); 
             break;
         case 'd':
             document.delete_row(); 

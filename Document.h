@@ -31,10 +31,9 @@ public:
     string advance_rows(int num);  // advence in the given number of rows
     string go_back_rows(int num);  // go back in the given number of rows
     string last_row();  // go to the last row of the text
-    void add_rows_after();  // add one or more rows after the current row
-    void add_rows_before();  // add one or more rows before the current row
-    void change_row();  // change the current row by one or more rows
-    /* the above three methods stop when a '.' recieved from the user */
+    void add_row_after(string line);  // add one row after the current row
+    void add_row_before(string line);  // add one row before the current row
+    void change_row(string line);  // change the current row by another row
     void delete_row();  // delete the current row 
     void search_text(string text);  // search the given text in the following rows, and set
                                       // these row as curr_row

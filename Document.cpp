@@ -8,8 +8,7 @@ vector<string> Document::get_text() {
     return this->text; 
 }
 
-string Document::goto_row(int row) {
-    // cout << "row: " + row << endl; 
+string Document::goto_row(int row) {  // number (1,3)
     if(row > text.size()) {  // there is no such row
         throw "no such row"; 
     }
@@ -17,7 +16,7 @@ string Document::goto_row(int row) {
     return text[curr_row-1];  
 }
 
-string Document::advance_rows(int num) {
+string Document::advance_rows(int num) {  // +
     int new_row = curr_row + num; 
     if(new_row > text.size()) {  // there is no such row
         throw "no such row"; 
@@ -26,7 +25,7 @@ string Document::advance_rows(int num) {
     return text[curr_row-1];
 }
 
-string Document::go_back_rows(int num) {
+string Document::go_back_rows(int num) {  // -
     int new_row = curr_row - num; 
     if(new_row < 1) {  // there is no such row
         throw "no such row"; 
@@ -35,27 +34,20 @@ string Document::go_back_rows(int num) {
     return text[curr_row-1];
 }
 
-string Document::last_row() {
+string Document::last_row() {  // $
     curr_row = text.size(); 
     return text[curr_row-1];
 }
 
-void Document::add_rows_after() {
-    string input; 
-    auto it = text.begin() + curr_row; 
-    while (getline(cin, input)) {
-        if (!input.empty() && input != ".") { 
-            text.insert(it, input);
-            it++; 
-        } else {
-            return; 
-        }
-    }
+void Document::add_row_after(string line) {  // a
+    auto it = text.begin() + curr_row + 1; 
+    text.insert(it, line);
+    curr_row ++; 
 }
 
-void Document::add_rows_before() {}
+void Document::add_row_before(string line) {}
 
-void Document::change_row() {}
+void Document::change_row(string line) {}
 
 void Document::delete_row() {}
 
