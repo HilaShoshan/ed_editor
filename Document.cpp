@@ -41,7 +41,7 @@ string Document::last_row() {  // $
 
 void Document::add_row_after(string line) {  // a
     if (!line.empty()) {
-        auto it = text.begin() + curr_row + 1; 
+        auto it = text.begin() + curr_row; 
         text.insert(it, line);
         curr_row ++; 
     }
@@ -49,16 +49,17 @@ void Document::add_row_after(string line) {  // a
 
 void Document::add_row_before(string line) {  // i 
     if (!line.empty()) {
-        auto it = text.begin() + curr_row; 
+        auto it = text.begin() + curr_row - 1; 
         text.insert(it, line);
     }
 }
 
 bool Document::change_row(string line, bool isFirst) {  // c
+    int index = curr_row - 1;  // the index of curr_row
     if (!line.empty()) {
         int this_size = text.size(); 
         if (isFirst)  // this is the first row we add -> should replace curr_row
-            text[curr_row] = line; 
+            text[index] = line; 
         else 
             add_row_after(line); 
         return true;  // we enter new line
@@ -66,12 +67,53 @@ bool Document::change_row(string line, bool isFirst) {  // c
     else return false;  // fail to enter new line
 }
 
-void Document::delete_row() {}
+void Document::delete_row(int index) {  // d
+    auto it = text.begin() + index; 
+    text.erase(it); 
+}
 
-void Document::search_text(string text) {}
+void Document::search_text(string txt) {  // /text/
+    int i = curr_row;  // *index* to begin with (curr_row index + 1)
+    size_t found; 
+    while (i != curr_row-1) {
+        if (i >= text.size()) 
+            i = 0;
+        found = text[i].find(txt); 
+        if (found != string::npos) {  // found txt in the ith line
+            curr_row = i; 
+            return; 
+        }
+        i++; 
+    }
+}
 
-void Document::change_text(string old_txt, string new_txt) {}
+void Document::change_text(string old_txt, string new_txt) {  // ‫‪s/old/new/‬‬
+    size_t found = text[curr_row-1].find(old_txt); 
+    if (found != string::npos) {  // found old_txt in the current row
+        text[curr_row-1].replace(found, old_txt.size(), new_txt); 
+    }
+}
 
-void Document::concat_rows() {}
+void Document::concat_rows() {  // j
+    if (curr_row > text.size()) {
+        throw runtime_error("Concatenation failed: there is no netxt row"); 
+    }
+    text[curr_row-1] = text[curr_row-1] + text[curr_row]; 
+    delete_row(curr_row); 
+}
 
-void Document::make_file() {}
+void Document::make_file(string output_filename) {  // w file
+    ofstream output_file;
+    string line; 
+    output_file.open(output_filename);
+    if (output_file.is_open()) {
+        int i = 0; 
+        do {
+            line = text[i]; 
+            output_file << line << endl;  // write the line to output_filename
+            i++; 
+        } while(line != "");
+        output_file.close();
+    }
+    else cout << "Unable to open file"; 
+}

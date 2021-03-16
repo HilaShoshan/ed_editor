@@ -10,6 +10,10 @@ void Editor::loop() {
     bool isFirst = true;  // for change_row method
     bool isEntered;     // too 
 
+    int curr_index;  // for delete row
+
+    string output_filename;  // for w file method
+
     while (command[0] != 'q') {
         switch (command[0]) {
         case '1':
@@ -57,7 +61,10 @@ void Editor::loop() {
             }            
             break; 
         case 'd':
-            document.delete_row(); 
+            curr_index = document.get_curr_row() - 1;
+            cout << "text size: " << document.get_text().size() << endl; 
+            document.delete_row(curr_index);
+            cout << "after deleting: " << document.get_text().size() << endl;  
             break; 
         case '/':
             document.search_text("text"); 
@@ -69,7 +76,8 @@ void Editor::loop() {
             document.concat_rows(); 
             break;
         case 'w': 
-            document.make_file(); 
+            output_filename = command.substr(1); 
+            document.make_file(output_filename); 
             break; 
         default:
             if(command[0] != 'q') cout << "?" << endl;
