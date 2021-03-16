@@ -76,7 +76,8 @@ void Editor::loop() {
             document.concat_rows(); 
             break;
         case 'w': 
-            output_filename = command.substr(1); 
+            cin >> output_filename; 
+            cout << output_filename << endl; 
             document.make_file(output_filename); 
             break; 
         default:

@@ -103,17 +103,6 @@ void Document::concat_rows() {  // j
 }
 
 void Document::make_file(string output_filename) {  // w file
-    ofstream output_file;
-    string line; 
-    output_file.open(output_filename);
-    if (output_file.is_open()) {
-        int i = 0; 
-        do {
-            line = text[i]; 
-            output_file << line << endl;  // write the line to output_filename
-            i++; 
-        } while(line != "");
-        output_file.close();
-    }
-    else cout << "Unable to open file"; 
+    ofstream output_file(output_filename);
+    for (const auto &e : text) output_file << e << "\n";
 }
