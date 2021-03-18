@@ -31,6 +31,7 @@ public:
     ~Document(){}
 
     int get_curr_row(); 
+    void set_surr_row(int new_curr); 
 
     vector<string> get_text(); 
 

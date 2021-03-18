@@ -4,6 +4,10 @@ int Document::get_curr_row() {
     return this->curr_row; 
 }
 
+void Document::set_surr_row(int new_curr) {
+    this->curr_row = new_curr; 
+}
+
 vector<string> Document::get_text() {
     return this->text; 
 }
@@ -22,6 +26,7 @@ string Document::advance_rows(int num) {  // +
         throw "no such row"; 
     }
     curr_row = new_row; 
+    cout << "+++++++++" << curr_row << endl;
     return text[curr_row-1];
 }
 
@@ -51,7 +56,7 @@ void Document::add_row_before(string line) {  // i
     if (!line.empty()) {
         auto it = text.begin() + curr_row - 1; 
         text.insert(it, line);
-        curr_row++;
+        curr_row++;  // the line is the same, only its index has changed
     }
 }
 

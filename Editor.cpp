@@ -7,6 +7,8 @@ void Editor::loop() {
 
     string line; 
 
+    int num;  // for + and - 
+
     bool isFirst = true;  // for change_row method
     bool isEntered;     // too 
 
@@ -23,9 +25,11 @@ void Editor::loop() {
             cout << document.goto_row(3) << endl; 
             break;
         case '+':
-            cout << document.advance_rows(2) << endl; 
+            num = int(command[1]); 
+            cout << document.advance_rows(num) << endl; 
             break; 
         case '-':
+            num = int(command[1]); 
             cout << document.go_back_rows(1) << endl; 
             break;
         case '$':
@@ -49,6 +53,9 @@ void Editor::loop() {
                 cout << "text size: " << document.get_text().size() << endl; 
                 getline(cin, line);  // ask for another line
             }            
+            cout << "################" << document.get_curr_row() << endl; 
+            document.set_surr_row(document.get_curr_row()-1); 
+            cout << "################" << document.get_curr_row() << endl;
             break; 
         case 'c':
             cout << "Replace current row with (one or more lines): " << endl; 
