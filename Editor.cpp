@@ -1,4 +1,6 @@
 # include "Editor.h"
+# include <regex>
+# include <algorithm>
 
 void Editor::loop() {
 
@@ -15,6 +17,11 @@ void Editor::loop() {
     int curr_index;  // for delete row
 
     string output_filename;  // for w file method
+
+    string txt1, txt2;  // for / and s 
+    stringstream stream; 
+    std::string segment;
+    std::vector<std::string> seglist;
 
     while (command[0] != 'q') {
         switch (command[0]) {
@@ -53,9 +60,7 @@ void Editor::loop() {
                 cout << "text size: " << document.get_text().size() << endl; 
                 getline(cin, line);  // ask for another line
             }            
-            cout << "################" << document.get_curr_row() << endl; 
             document.set_surr_row(document.get_curr_row()-1); 
-            cout << "################" << document.get_curr_row() << endl;
             break; 
         case 'c':
             cout << "Replace current row with (one or more lines): " << endl; 
@@ -75,10 +80,21 @@ void Editor::loop() {
             cout << "after deleting: " << document.get_text().size() << endl;  
             break; 
         case '/':
-            document.search_text("text"); 
+            stream = stringstream(command); 
+            while(getline(stream, segment, '/')) {
+                seglist.push_back(segment);
+            }
+            txt1 = seglist[0]; 
+            document.search_text(txt1); 
             break; 
         case 's':
-            document.change_text("old", "new"); 
+            stream = stringstream(command); 
+            while(getline(stream, segment, '/')) {
+                seglist.push_back(segment);
+            }
+            txt1 = seglist[1]; 
+            txt2 = seglist[2]; 
+            document.change_text(txt1, txt2); 
             break;
         case 'j':
             document.concat_rows(); 
