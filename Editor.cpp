@@ -81,6 +81,7 @@ void Editor::loop() {
         case '/':
             txt1 = command.substr(1, command.size()-2); 
             document.search_text(txt1); 
+            cout << command << " " << document.get_curr_row() << endl;
             break; 
         case 's':
             if (command[command.size()-1] != '/') { // there is a " " and the command didnt really end
@@ -97,7 +98,6 @@ void Editor::loop() {
                 command.erase(0, pos + delimiter.length());
                 iteration++;
             }
-            cout << "txt1, txt2 : " << txt1 << "#" << txt2 << "#" << endl;  
             document.change_text(txt1, txt2); 
             break;
         case 'j':

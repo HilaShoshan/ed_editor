@@ -45,9 +45,15 @@ string Document::last_row() {  // $
 
 void Document::add_row_after(string line) {  // a
     if (!line.empty()) {
-        auto it = text.begin() + curr_row; 
-        text.insert(it, line);
-        curr_row ++; 
+        cout << "line: " << line << endl; 
+        if (text.size() == 0) {
+            text.push_back(line); 
+            cout << "pushed !" << endl;
+        } else {
+            auto it = text.begin() + curr_row; 
+            text.insert(it, line);
+            curr_row ++; 
+        }
     }
 }
 
@@ -85,7 +91,7 @@ void Document::search_text(string txt) {  // /text/
             i = 0;
         found = text[i].find(txt); 
         if (found != string::npos) {  // found txt in the ith line
-            curr_row = i; 
+            curr_row = i+1; 
             return; 
         }
         i++; 
@@ -93,8 +99,8 @@ void Document::search_text(string txt) {  // /text/
 }
 
 void Document::change_text(string old_txt, string new_txt) {  // ‫‪s/old/new/‬‬
-    try {
-        text.at(curr_row).replace(text.at(curr_row).find(old_txt), old_txt.size(), new_txt);
+    try {  
+        text.at(curr_row-1).replace(text.at(curr_row-1).find(old_txt), old_txt.size(), new_txt);
     } catch(std::out_of_range) {
         cout << "?" << endl; 
     }
