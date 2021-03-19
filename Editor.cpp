@@ -32,12 +32,12 @@ void Editor::loop() {
             cout << document.goto_row(3) << endl; 
             break;
         case '+':
-            num = int(command[1]); 
+            num = (int)command[1] - 48;  // convert to int
             cout << document.advance_rows(num) << endl; 
             break; 
         case '-':
-            num = int(command[1]); 
-            cout << document.go_back_rows(1) << endl; 
+            num = (int)command[1] - 48;  // convert to int
+            cout << document.go_back_rows(num) << endl; 
             break;
         case '$':
             cout << document.last_row() << endl; 

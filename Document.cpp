@@ -26,7 +26,6 @@ string Document::advance_rows(int num) {  // +
         throw "no such row"; 
     }
     curr_row = new_row; 
-    cout << "+++++++++" << curr_row << endl;
     return text[curr_row-1];
 }
 
