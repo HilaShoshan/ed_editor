@@ -93,9 +93,10 @@ void Document::search_text(string txt) {  // /text/
 }
 
 void Document::change_text(string old_txt, string new_txt) {  // ‫‪s/old/new/‬‬
-    size_t found = text[curr_row-1].find(old_txt); 
-    if (found != string::npos) {  // found old_txt in the current row
-        text[curr_row-1].replace(found, old_txt.size(), new_txt); 
+    try {
+        text.at(curr_row).replace(text.at(curr_row).find(old_txt), old_txt.size(), new_txt);
+    } catch(std::out_of_range) {
+        cout << "?" << endl; 
     }
 }
 

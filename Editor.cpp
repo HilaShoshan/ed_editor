@@ -18,10 +18,9 @@ void Editor::loop() {
 
     string output_filename;  // for w file method
 
-    string txt1, txt2;  // for / and s 
-    stringstream stream; 
-    std::string segment;
-    std::vector<std::string> seglist;
+    string txt1, txt2, delimiter, token, addition;  // for / and s 
+    size_t pos, iteration; 
+    vector<string> txts; 
 
     while (command[0] != 'q') {
         switch (command[0]) {
@@ -80,20 +79,25 @@ void Editor::loop() {
             cout << "after deleting: " << document.get_text().size() << endl;  
             break; 
         case '/':
-            stream = stringstream(command); 
-            while(getline(stream, segment, '/')) {
-                seglist.push_back(segment);
-            }
-            txt1 = seglist[0]; 
+            txt1 = command.substr(1, command.size()-2); 
             document.search_text(txt1); 
             break; 
         case 's':
-            stream = stringstream(command); 
-            while(getline(stream, segment, '/')) {
-                seglist.push_back(segment);
+            if (command[command.size()-1] != '/') { // there is a " " and the command didnt really end
+                cin >> addition; 
+                command = command + " " + addition; 
             }
-            txt1 = seglist[1]; 
-            txt2 = seglist[2]; 
+            delimiter = "/"; 
+            pos = 0;
+            iteration = 0; 
+            while ((pos = command.find(delimiter)) != std::string::npos) {
+                token = command.substr(0, pos);
+                if (iteration == 1) txt1 = token;
+                if (iteration == 2) txt2 = token; 
+                command.erase(0, pos + delimiter.length());
+                iteration++;
+            }
+            cout << "txt1, txt2 : " << txt1 << "#" << txt2 << "#" << endl;  
             document.change_text(txt1, txt2); 
             break;
         case 'j':
